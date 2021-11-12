@@ -6,12 +6,18 @@ export default function CssCollector(objeto) {
     this.parent = objeto.parentElement;
     this.position = window.getComputedStyle(objeto).position;
     this.display = window.getComputedStyle(objeto).display;
-
+    this.container;
     // é quem vai adicionar o CssCollector a pagina
     this.collectorBody = function () {
       const body = document.querySelector("body");
-      body.appendChild(this.corpo());
+      this.container = this.corpo();
+      body.appendChild(this.container);
+      /**se eu acionasse essa função antes de colocar os elementos na pagina html,
+       * o elemento não seria achado*/
+      this.funcoes();
+      return this.container;
     };
+
     // é o corpo do objeto contendo suas informaçoes(monta o corpo)
     this.corpo = function () {
       const corpo = document.createElement("div");
@@ -45,7 +51,7 @@ export default function CssCollector(objeto) {
                             </ul>
                             <div id="inputCss">
                                 <input type="text" placeholder="Estilo..." />
-                                <button>
+                                <button id='enter'>
                                     <img src="fotos/enter.png" alt="" />
                                 </button>
                             </div>
@@ -53,8 +59,56 @@ export default function CssCollector(objeto) {
       return corpo;
     };
 
-    // vamos executar o collectorBody(vai adicionar no body)
-    this.collectorBody();
+    // aqui se encontra todas as funçoes disponiveis pra esse objeto
+    this.funcoes = function () {
+      // destaca quem é o pai do objeto selecionado
+      this.selecionaPai = function () {
+        let item = document.querySelector("#parent");
+        console.log("aqui");
+        item.addEventListener("click", () => {
+          if (this.parent.style.border == "") {
+            this.parent.style.border = "2px solid black";
+            console.log(this);
+          } else {
+            this.parent.style.border = "";
+          }
+        });
+      };
+      // desativa e ativa o que foi setado no display
+      this.desativaDisplay = function (item) {
+        item.addEventListener("click", () => {
+          if (!this.btnAtivo) {
+            objeto.style.display = this.display;
+            item.style.border = "";
+            this.btnAtivo = true;
+            console.log("desligado");
+          } else {
+            item.style.border = "2px dotted white";
+            objeto.style.display = "inherit";
+            this.btnAtivo = false;
+            console.log("ativo");
+            console.log(objeto.style.display);
+          }
+
+          // console.log(window.getComputedStyle(objeto).display);
+        });
+      };
+      // habilita a função de settar estilos css
+      this.setStyle = function () {
+        let btn = document.querySelector("#enter");
+        let item = document.querySelector("#inputCss input");
+        btn.addEventListener("click", () => {
+          let property = item.value.split(":");
+          objeto.style[property[0]] = property[1];
+          item.value = "";
+          // item.value = "";
+        });
+      };
+      // ACIONA AS FUNÇOES
+      this.selecionaPai();
+      // this.desativaDisplay();
+      // this.setStyle();
+    };
   } else {
     console.log("passe um objeto");
   }
