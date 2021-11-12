@@ -7,6 +7,7 @@ export default function CssCollector(objeto) {
     this.position = window.getComputedStyle(objeto).position;
     this.display = window.getComputedStyle(objeto).display;
     this.container;
+
     // é quem vai adicionar o CssCollector a pagina
     this.collectorBody = function () {
       const body = document.querySelector("body");
@@ -46,7 +47,7 @@ export default function CssCollector(objeto) {
                                 </li>
                                 <li id="parent">
                                     <img src="fotos/parent.png" alt="elemento-pai" />
-                                    <span>${this.parent}</span>
+                                    <span>${this.parent.tagName}</span>
                                 </li>
                             </ul>
                             <div id="inputCss">
@@ -59,55 +60,58 @@ export default function CssCollector(objeto) {
       return corpo;
     };
 
-    // aqui se encontra todas as funçoes disponiveis pra esse objeto
+    // aqui se encontra todas as funçoes disponiveis pra esse objeto. Assim que o objeto
+    // for instanciado, as funçoes serão acionadas
     this.funcoes = function () {
-      // destaca quem é o pai do objeto selecionado
-      this.selecionaPai = function () {
-        let item = document.querySelector("#parent");
-        console.log("aqui");
-        item.addEventListener("click", () => {
-          if (this.parent.style.border == "") {
-            this.parent.style.border = "2px solid black";
-            console.log(this);
-          } else {
-            this.parent.style.border = "";
-          }
-        });
-      };
-      // desativa e ativa o que foi setado no display
-      this.desativaDisplay = function (item) {
-        item.addEventListener("click", () => {
-          if (!this.btnAtivo) {
-            objeto.style.display = this.display;
-            item.style.border = "";
-            this.btnAtivo = true;
-            console.log("desligado");
-          } else {
-            item.style.border = "2px dotted white";
-            objeto.style.display = "inherit";
-            this.btnAtivo = false;
-            console.log("ativo");
-            console.log(objeto.style.display);
-          }
-
-          // console.log(window.getComputedStyle(objeto).display);
-        });
-      };
-      // habilita a função de settar estilos css
-      this.setStyle = function () {
-        let btn = document.querySelector("#enter");
-        let item = document.querySelector("#inputCss input");
-        btn.addEventListener("click", () => {
-          let property = item.value.split(":");
-          objeto.style[property[0]] = property[1];
-          item.value = "";
-          // item.value = "";
-        });
-      };
-      // ACIONA AS FUNÇOES
+      /*
+      ACIONA AS FUNÇOES
+      */
       this.selecionaPai();
-      // this.desativaDisplay();
-      // this.setStyle();
+      this.desativaDisplay();
+      this.setStyle();
+    };
+    // destaca quem é o pai do objeto selecionado
+    this.selecionaPai = function () {
+      let item = document.querySelector("#parent");
+      console.log("aqui");
+      item.addEventListener("click", () => {
+        if (this.parent.style.border == "") {
+          this.parent.style.border = "2px solid black";
+        } else {
+          this.parent.style.border = "";
+        }
+      });
+    };
+    // desativa e ativa o que foi setado no display
+    this.desativaDisplay = function () {
+      let item = document.querySelector("#display");
+      item.addEventListener("click", () => {
+        if (!this.btnAtivo) {
+          objeto.style.display = this.display;
+          item.style.border = "";
+          this.btnAtivo = true;
+          console.log("desligado");
+        } else {
+          item.style.border = "2px dotted white";
+          objeto.style.display = "inherit";
+          this.btnAtivo = false;
+          console.log("ativo");
+          console.log(objeto.style.display);
+        }
+
+        // console.log(window.getComputedStyle(objeto).display);
+      });
+    };
+    // habilita a função de settar estilos css
+    this.setStyle = function () {
+      let btn = document.querySelector("#enter");
+      let item = document.querySelector("#inputCss input");
+      btn.addEventListener("click", () => {
+        let property = item.value.split(":");
+        objeto.style[property[0]] = property[1];
+        item.value = "";
+        // item.value = "";
+      });
     };
   } else {
     console.log("passe um objeto");
