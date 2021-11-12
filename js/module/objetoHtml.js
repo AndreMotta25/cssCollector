@@ -25,7 +25,7 @@ export default function CssCollector(objeto) {
       corpo.id = "cssCollector";
       corpo.innerHTML = `<div id='cabecalho'>
                             <h2>${objeto.tagName + "." + objeto.classList}</h2>
-                            <button><img src='fotos/close.png'/></button>
+                            <button id='fechar'><img src='fotos/close.png'/></button>
                         </div>
                         <div id="informacoes">
                             <ul>
