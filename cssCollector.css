@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+#cssCollector {
+  background-color: #525252;
+  min-height: 361px;
+  max-width: 303px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
+  position: absolute;
+  transform: translateX(-50%);
+}
+#cssCollector.ligado {
+  transform: translateX(0%);
+  transition: transform 0.5s ease-in;
+}
+#cabecalho {
+  display: flex;
+  background: rgba(197, 33, 255, 0.29);
+  justify-content: space-between;
+  border-radius: 10px;
+  width: 100%;
+  padding: 14px;
+  height: 52px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#cabecalho button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+#informacoes {
+  padding: 14px;
+}
+#informacoes ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#informacoes li {
+  display: flex;
+  flex: 0 1 125px;
+  align-items: center;
+  margin-top: 20px;
+}
+#cssCollector #informacoes li span {
+  padding: 6px 10px;
+  background-color: #7ff692;
+  border-radius: 10px;
+  margin-left: 8px;
+  font-weight: bold;
+  text-align: center;
+  flex: 1;
+  cursor: pointer;
+  transform: translateX(-30%);
+}
+#cssCollector.ligado #informacoes li span {
+  transform: translateX(0%);
+  transition: all 0.5s ease-in;
+}
+#cssCollector.ligado #informacoes li span:hover {
+  background-color: darkorchid;
+}
+#inputCss {
+  position: relative;
+  margin-top: 76px;
+}
+#inputCss input {
+  width: 100%;
+  height: 49px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  padding-left: 14px;
+  font-size: 16px;
+}
+
+#inputCss button {
+  position: absolute;
+  right: 0;
+  border: none;
+  height: 100%;
+  background-color: white;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+#inputCss button:active {
+  background: linear-gradient(
+    to right,
+    rgba(28, 179, 226),
+    rgba(67, 159, 188, 0)
+  );
+}
+/* 
+.teste {
+  width: 200px;
+  height: 200px;
+  background-color: royalblue;
+  display: flex;
+}
+.teste ul {
+  padding-top: 1px;
+  background-color: salmon;
+}
+.teste ul li {
+  margin-top: 20px;
+  background-color: wheat;
+} */
