@@ -3,19 +3,18 @@ import CssCollector from "./objetoHtml.js";
 export default function initCssCollector() {
   // vamos pegar todos os filhos de body
   const filhosBody = document.querySelectorAll("body > *");
-  var container;
   var ativo = false;
 
   function move(e) {
-    container.style.left = e.clientX - 10 + "px";
-    container.style.top = e.clientY - 10 + "px";
+    constroiCssCollector.cssCollector.style.left = e.clientX - 10 + "px";
+    constroiCssCollector.cssCollector.style.top = e.clientY - 10 + "px";
   }
 
   function moveCollector() {
     if (ativo) {
-      container.addEventListener("dblclick", () => {
-        container.classList.toggle("ativo");
-        if (container.classList.contains("ativo")) {
+      constroiCssCollector.cssCollector.addEventListener("dblclick", () => {
+        constroiCssCollector.cssCollector.classList.toggle("ativo");
+        if (constroiCssCollector.cssCollector.classList.contains("ativo")) {
           window.addEventListener("mousemove", move);
         } else {
           window.removeEventListener("mousemove", move);
@@ -25,23 +24,22 @@ export default function initCssCollector() {
   }
   // fecha o cssCollector
   function fechar() {
-    const btn_close = document.querySelector("#cssCollector #foto");
+    const btn_close = document.querySelector("#cssCollector #fechar");
     btn_close.addEventListener("click", () => {
-      container.remove();
+      constroiCssCollector.cssCollector.remove();
       ativo = false;
     });
   }
+  // faço de um objeto um evento para poder usar o cssCollector em outros lugares
+  // como em fechar()
   const constroiCssCollector = {
-    cssCollector: "",
     handleEvent(e) {
-      this.cssCollector = new CssCollector(e.target);
-      // constroi o corpo de coletor
-      // this.cssCollector.collectorBody();
-      // fechar();
-      container = document.querySelector("#cssCollector");
-      container.classList.add("ligado");
+      this.cssCollector = new CssCollector(e.target).collectorBody();
+      this.cssCollector.classList.add("ligado");
       ativo = true;
+      fechar();
       moveCollector();
+      // console.log(this.cssCollector);
     },
   };
   filhosBody.forEach((elem) => {
