@@ -1,4 +1,5 @@
-import initObjeto from "./objetoHtml.js";
+import CssCollector from "./objetoHtml.js";
+// import initObjeto from "./objetoHtml.js";
 export default function initCssCollector() {
   // vamos pegar todos os filhos de body
   const filhosBody = document.querySelectorAll("body > *");
@@ -33,10 +34,10 @@ export default function initCssCollector() {
   const constroiCssCollector = {
     cssCollector: "",
     handleEvent(e) {
-      this.cssCollector = new initObjeto(e.target);
+      this.cssCollector = new CssCollector(e.target);
       // constroi o corpo de coletor
-      this.cssCollector.collectorBody();
-      fechar();
+      // this.cssCollector.collectorBody();
+      // fechar();
       container = document.querySelector("#cssCollector");
       container.classList.add("ligado");
       ativo = true;
