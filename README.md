@@ -12,12 +12,5 @@ uma janela sera aberta, nela voce poderá ver algumas informaçoes como:
 Caso de um duplo clique na janela, voce poderá leva-la para qualquer lugar dentro do navegador simplesmente usando mouse.
 Para solta-la basta dar um duplo clique.
 
-fazendo o primeiro teste
-ola andre relaie
-ola motta
-testando mais uma vez
-testando mota
-ola motta
-acho que vai dar um conflito
-outro teste
+
 
